@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="UserMacros">
+    <ProjPlatform Condition="'$(Platform)'=='Win32'">x86</ProjPlatform>
+    <ProjPlatform Condition="'$(Platform)'=='x86'">x86</ProjPlatform>
+    <ProjPlatform Condition="'$(Platform)'=='x64'">x64</ProjPlatform>
+    <ProjPlatform Condition="'$(Platform)'==''">$(Platform)</ProjPlatform>
+    
+    <ProjBinaries>$(SolutionDir)binaries\$(Configuration)\</ProjBinaries>
+    <ProjInterm>$(SolutionDir)intermediate\temp\$(ProjPlatform)\$(Configuration)\</ProjInterm>
+    <ProjLibraries>$(SolutionDir)intermediate\lib\$(Configuration)\</ProjLibraries>
+    <ProjExternals>$(SolutionDir)externals\</ProjExternals>
+    <ProjSdk>$(SolutionDir)resources\sdk\</ProjSdk>
+  </PropertyGroup>
+  
+  <PropertyGroup Label="OutputDirectories">
+    <OutDir Condition="'$(ConfigurationType)'=='Application'"   >$(ProjBinaries)</OutDir>
+    <OutDir Condition="'$(ConfigurationType)'=='DynamicLibrary'">$(ProjBinaries)</OutDir>
+    <OutDir Condition="'$(ConfigurationType)'=='StaticLibrary'" >$(ProjLibraries)</OutDir>
+    <IntDir>$(ProjInterm)$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>
+        $(ProjectDir);
+        $(SolutionDir);
+        $(SolutionDir)sources;
+        $(ProjExternals);
+        %(AdditionalIncludeDirectories)
+      </AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>
+        $(ProjLibraries);
+        $(ProjSdk);
+        %(AdditionalLibraryDirectories)
+      </AdditionalLibraryDirectories>
+      <ImportLibrary>$(ProjLibraries)\$(ProjectName).lib</ImportLibrary>
+    </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>
+        $(ProjLibraries);
+        $(ProjSdk);
+        %(AdditionalLibraryDirectories)
+      </AdditionalLibraryDirectories>
+      <OutputFile>$(ProjLibraries)\$(ProjectName).lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>  
+  
+</Project>
