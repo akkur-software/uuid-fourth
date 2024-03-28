@@ -4,7 +4,7 @@
     <TestsPlatform Condition="'$(Platform)'=='Win32'">x86</TestsPlatform>
     <TestsPlatform Condition="'$(Platform)'=='x86'">x86</TestsPlatform>
     <TestsPlatform Condition="'$(Platform)'=='x64'">x64</TestsPlatform>
-    <TestsPlatform Condition="'$(Platform)'==''">$(Platform)</TestsPlatform>
+    <TestsPlatform Condition="'$(TestsPlatform)'==''">$(Platform)</TestsPlatform>
     
     <TestsBinaries>$(SolutionDir)intermediate\tests\$(Configuration)\</TestsBinaries>
     <TestsInterm>$(SolutionDir)intermediate\tests\temp\$(TestsPlatform)\$(Configuration)\</TestsInterm>

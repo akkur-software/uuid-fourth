@@ -14,9 +14,7 @@
   </PropertyGroup>
   
   <PropertyGroup Label="OutputDirectories">
-    <OutDir Condition="'$(ConfigurationType)'=='Application'"   >$(ProjBinaries)</OutDir>
-    <OutDir Condition="'$(ConfigurationType)'=='DynamicLibrary'">$(ProjBinaries)</OutDir>
-    <OutDir Condition="'$(ConfigurationType)'=='StaticLibrary'" >$(ProjLibraries)</OutDir>
+    <OutDir>$(ProjBinaries)</OutDir>
     <IntDir>$(ProjInterm)$(ProjectName)\</IntDir>
   </PropertyGroup>
   
