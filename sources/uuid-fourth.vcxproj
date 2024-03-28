@@ -18,6 +18,14 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Uuid.cpp" />
+    <ClCompile Include="UuidParser.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Uuid.h" />
+    <ClInclude Include="UuidParser.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>

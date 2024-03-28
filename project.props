@@ -34,7 +34,7 @@
         $(ProjSdk);
         %(AdditionalLibraryDirectories)
       </AdditionalLibraryDirectories>
-      <ImportLibrary>$(ProjLibraries)\$(ProjectName).lib</ImportLibrary>
+      <ImportLibrary>$(ProjBinaries)\$(ProjectName).lib</ImportLibrary>
     </Link>
     <Lib>
       <AdditionalLibraryDirectories>
@@ -42,7 +42,7 @@
         $(ProjSdk);
         %(AdditionalLibraryDirectories)
       </AdditionalLibraryDirectories>
-      <OutputFile>$(ProjLibraries)\$(ProjectName).lib</OutputFile>
+      <OutputFile>$(ProjBinaries)\$(ProjectName).lib</OutputFile>
     </Lib>
   </ItemDefinitionGroup>  
   

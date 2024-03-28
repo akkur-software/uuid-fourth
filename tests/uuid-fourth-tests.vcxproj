@@ -161,6 +161,11 @@
   <ItemGroup>
     <ClCompile Include="uuid-fourth-tests.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\sources\uuid-fourth.vcxproj">
+      <Project>{3922d1c6-9206-4024-b3ec-7fa786c7afa8}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

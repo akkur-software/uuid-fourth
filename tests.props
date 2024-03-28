@@ -7,12 +7,11 @@
     <TestsPlatform Condition="'$(TestsPlatform)'==''">$(Platform)</TestsPlatform>
     
     <TestsBinaries>$(SolutionDir)intermediate\tests\$(Configuration)\</TestsBinaries>
-    <TestsInterm>$(SolutionDir)intermediate\tests\temp\$(TestsPlatform)\$(Configuration)\</TestsInterm>
+    <TestsInterm>$(SolutionDir)intermediate\temp\$(TestsPlatform)\$(Configuration)\</TestsInterm>
   </PropertyGroup>
   
-  <PropertyGroup Label="OutputDirectories">
-    <OutDir Condition="'$(ConfigurationType)'=='Application'"   >$(TestsBinaries)</OutDir>
-    <OutDir Condition="'$(ConfigurationType)'=='DynamicLibrary'">$(TestsBinaries)</OutDir>
+  <PropertyGroup Label="OutputDirectories">    
+    <OutDir>$(TestsBinaries)</OutDir>
     <IntDir>$(TestsInterm)$(ProjectName)\</IntDir>
   </PropertyGroup>
   
@@ -27,11 +26,13 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>
+        $(SolutionDir)binaries\$(Configuration);
         %(AdditionalLibraryDirectories)
       </AdditionalLibraryDirectories>
     </Link>
     <Lib>
       <AdditionalLibraryDirectories>
+        $(SolutionDir)binaries\$(Configuration);
         %(AdditionalLibraryDirectories)
       </AdditionalLibraryDirectories>
     </Lib>
