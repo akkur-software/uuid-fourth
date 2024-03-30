@@ -33,11 +33,6 @@ public:
     std::array<uint8_t, 16> Value() const;
 
     /// <summary>
-    /// Валидный ли UUID
-    /// </summary>
-    bool IsValid() const;
-
-    /// <summary>
     /// Строковое представление идентификатора
     /// </summary>
     std::string_view ToString() const;        
@@ -68,5 +63,4 @@ private:
 private:
     std::array<uint8_t, 16> m_value;
     std::string m_stringValue;
-    bool m_isValid;
 };

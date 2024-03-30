@@ -42,7 +42,7 @@ auto uuidString = uuid.ToString(); // строковое представлен�
 ```c++
 auto uuid1 = Uuid(); // 3422b448-2460-4fd2-9183-8000de6f8343
 auto uuid2 = Uuid(); // 6852b918-0691-4fac-8636-9012de6fb34a
-auto uuid3 = Uuid(); // 3422b448-2460-4fd2-9183-8000de6f8343
+auto uuid3 = Uuid(uuid1); // 3422b448-2460-4fd2-9183-8000de6f8343
 
 auto isEquals_1_2 = uuid1 == uuid2; // false
 auto isEquals_1_3 = uuid1 == uuid3; // true

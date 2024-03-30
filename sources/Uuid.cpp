@@ -28,13 +28,11 @@ Uuid::Uuid() : m_value(std::array<uint8_t, 16>())
 
     // Формирование строкового значения
     m_stringValue = stringify(m_value);
-    m_isValid = UuidParser::IsValid(m_stringValue.c_str());
 }
 
 Uuid::Uuid(const std::array<uint8_t, 16>& value) : m_value(value)
 {
     m_stringValue = stringify(m_value);
-    m_isValid = UuidParser::IsValid(m_stringValue.c_str());
 }
 
 Uuid::Uuid(const Uuid& uuid) : Uuid(uuid.Value()) { }
@@ -42,11 +40,6 @@ Uuid::Uuid(const Uuid& uuid) : Uuid(uuid.Value()) { }
 std::array<uint8_t, 16> Uuid::Value() const
 {
     return m_value;
-}
-
-bool Uuid::IsValid() const
-{
-    return m_isValid;
 }
 
 std::string_view Uuid::ToString() const
@@ -108,7 +101,12 @@ std::string Uuid::stringify(const std::array<uint8_t, 16>& array)
     result += byteToHex(array[13]);
     result += byteToHex(array[14]);
     result += byteToHex(array[15]);
-        
+
+    if (!UuidParser::IsValid(result.c_str()))
+    {
+        throw std::runtime_error(std::format("Invalid UUID string: {}", result.c_str()));
+    }
+    
     return result;
 }
 
