@@ -1,8 +1,6 @@
-#include "sources/Uuid.h"
-#include "sources/UuidParser.h"
+#include "sources/Uuid4.h"
 #include "CppUnitTest.h"
 #include <algorithm>
-#include <vector>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -13,12 +11,12 @@ public:
 	TEST_METHOD(GenerateNewUuid_Success)
 	{
 		// Arrange
-		Uuid uuid;
+		Uuid4 uuid;
 		std::array<uint8_t, UUID_SIZE> uuidValue;
 		std::string_view uuidString;
 
 		// Act
-		uuid = Uuid();
+		uuid = Uuid4();
 		uuidValue = uuid.Value();
 		uuidString = uuid.ToString();
 
@@ -26,21 +24,18 @@ public:
 		Assert::IsTrue(&uuid != nullptr);
 		Assert::IsTrue(uuidValue.size() == UUID_SIZE);
 		Assert::IsTrue(!std::all_of(uuidValue.begin(), uuidValue.end(), [](uint8_t byte) { return byte == 0; }));
-		Assert::IsTrue(uuid.IsValid());
 	}
 
 	TEST_METHOD(GenerateUuidFromSource_Success)
 	{
 		// Arrange
-		Uuid source = Uuid();
-		Uuid target;
+		Uuid4 source = Uuid4();
+		Uuid4 target;
 
 		// Act
-		target = Uuid(source);
+		target = Uuid4(source);
 
 		// Assert
-		Assert::IsTrue(source.IsValid());
-		Assert::IsTrue(target.IsValid());
 		Assert::IsTrue(target.Value() == source.Value());
 		Assert::AreEqual(source.ToString(), target.ToString());
 	}
@@ -49,18 +44,17 @@ public:
 	{
 		// Arrange
 		std::string_view raw = "3422b448-2460-4fd2-9183-8000de6f8343";
-		Uuid uuid;
+		Uuid4 uuid;
 		std::array<uint8_t, UUID_SIZE> uuidValue;
 
 		// Act
-		uuid = Uuid::Parse(raw);
+		uuid = Uuid4::Parse(raw);
 		uuidValue = uuid.Value();
 
 		// Assert
 		Assert::IsTrue(&uuid != nullptr);
 		Assert::IsTrue(uuid.Value().size() == UUID_SIZE);
 		Assert::IsTrue(!std::all_of(uuidValue.begin(), uuidValue.end(), [](uint8_t byte) { return byte == 0; }));
-		Assert::IsTrue(uuid.IsValid());
 		Assert::AreEqual(raw, uuid.ToString());
 	}
 
@@ -68,8 +62,8 @@ public:
 	{
 		// Arrange
 		std::string_view raw = "3422b448-246-4fd2-9183-8000de6f8343";
-		Uuid uuid;
-		auto func = [&]() { uuid = Uuid::Parse(raw); };
+		Uuid4 uuid;
+		auto func = [&]() { uuid = Uuid4::Parse(raw); };
 
 		// Act & Assert
 		Assert::ExpectException<std::invalid_argument>(func);
@@ -79,8 +73,8 @@ public:
 	{
 		// Arrange
 		std::string_view raw = "3422b448-24604fd2-9183-8000de6f8343";
-		Uuid uuid;
-		auto func = [&]() {	uuid = Uuid::Parse(raw); };
+		Uuid4 uuid;
+		auto func = [&]() {	uuid = Uuid4::Parse(raw); };
 
 		// Act & Assert
 		Assert::ExpectException<std::invalid_argument>(func);
@@ -90,31 +84,10 @@ public:
 	{
 		// Arrange
 		std::string_view raw = "3422b448-2460-4fd2-9183-8000de-6f8343";
-		Uuid uuid;
-		auto func = [&]() {	uuid = Uuid::Parse(raw); };
+		Uuid4 uuid;
+		auto func = [&]() {	uuid = Uuid4::Parse(raw); };
 
 		// Act & Assert
 		Assert::ExpectException<std::invalid_argument>(func);
-	}
-
-	TEST_METHOD(Parse_50000_Uuids_Success)
-	{
-		auto m_uuid_strings = std::vector<std::string>();
-
-		for (size_t i = 0; i < 50000; ++i)
-		{
-			auto uuid = Uuid();
-			m_uuid_strings.emplace_back(uuid.ToString().data());
-		}
-
-		bool allValid = true;
-		
-		for (auto uuidString : m_uuid_strings)
-		{
-			auto uuid = Uuid::Parse(uuidString);
-			allValid &= uuid.IsValid();
-		}
-
-		Assert::IsTrue(allValid);
 	}
 };

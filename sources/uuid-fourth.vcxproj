@@ -19,12 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Uuid.cpp" />
-    <ClCompile Include="UuidParser.cpp" />
+    <ClCompile Include="Uuid4.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Uuid.h" />
-    <ClInclude Include="UuidParser.h" />
+    <ClInclude Include="Uuid4.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
